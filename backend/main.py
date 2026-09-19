@@ -19,7 +19,11 @@ from ai_agent import ask_ai
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://skylark-bi-agent-1-hc9a.onrender.com",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
     allow_credentials=False, 
     allow_headers=["*"],
 )
