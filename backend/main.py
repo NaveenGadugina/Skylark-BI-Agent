@@ -1,5 +1,6 @@
-from fastapi import FastAPI, HTTPException
-from monday_client import get_board_items
+from websockets import Response
+
+from fastapi import FastAPI, HTTPException, Responsefrom monday_client import get_board_items
 from data_cleaner import clean_items
 import os
 from query_router import route_question
@@ -24,7 +25,8 @@ app.add_middleware(
         "http://localhost:5173",
         "http://127.0.0.1:5173",
     ],
-    allow_credentials=False, 
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"], 
     allow_headers=["*"],
 )
 
@@ -78,6 +80,16 @@ def get_work_order_analytics():
 class ChatRequest(BaseModel):
     question: str
 
+@app.options("/chat")
+def chat_options():
+    return Response(
+        status_code=204,
+        headers={
+            "Access-Control-Allow-Origin": "https://skylark-bi-agent-1-hc9a.onrender.com",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
+        },
+    )
 
 @app.post("/chat")
 def chat(request: ChatRequest):
