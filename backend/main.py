@@ -81,16 +81,6 @@ def get_work_order_analytics():
 class ChatRequest(BaseModel):
     question: str
 
-@app.options("/chat")
-def chat_options():
-    return Response(
-        status_code=204,
-        headers={
-            "Access-Control-Allow-Origin": "https://skylark-bi-agent-1-hc9a.onrender.com",
-            "Access-Control-Allow-Methods": "POST, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type",
-        },
-    )
 
 @app.post("/chat")
 def chat(request: ChatRequest):
