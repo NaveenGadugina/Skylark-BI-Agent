@@ -1,6 +1,7 @@
 from websockets import Response
 
-from fastapi import FastAPI, HTTPException, Responsefrom monday_client import get_board_items
+from fastapi import FastAPI, HTTPException, Response
+from monday_client import get_board_items
 from data_cleaner import clean_items
 import os
 from query_router import route_question
